@@ -7,7 +7,7 @@ import TodoList from '../components/TodoList'
 
 const URL = 'http://localhost:3003/api/todos'
 
-export default class Todo extends Component {
+class Todo extends Component {
   // "Amarrando" o this ao Todo component
   constructor(props) {
     super(props)
@@ -85,3 +85,5 @@ export default class Todo extends Component {
     )
   }
 }
+
+export default Todo
