@@ -1,7 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import IconButton from '../IconButton'
 
-export default props => {
+import { markAsDone, markAsPeding, remove } from '../../main/actions/actionsCreators'
+
+
+const TodoList = (props) => {
   const rendrRows = () => {
     const list = props.list || []
     return list.map(todo => (
@@ -43,3 +47,28 @@ export default props => {
     </table>
   )
 }
+
+function mapStateToProps(state) {
+  return {
+    list: state.todo.list
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleMarkAsDone(params) {
+      const action = markAsDone(params)
+      dispatch(action)
+    },
+    handleMarkAsPending(params) {
+      const action = markAsPeding(params)
+      dispatch(action)
+    },
+    handleRemove(params) {
+      const action = remove(params)
+      dispatch(action)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
