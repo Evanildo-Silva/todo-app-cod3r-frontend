@@ -25,7 +25,7 @@ export default function (state = INIT_STATE, action) {
     case 'TODO_SEARCHED':
       return {
         ...state,
-        list: action.payload
+        list: action.payload.data
       }
 
     default:

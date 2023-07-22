@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { changeDescription, search } from '../../main/actions/actionsCreators'
 import Grid from '../Grid'
 import IconButton from '../IconButton'
 
@@ -10,7 +11,7 @@ class TodoForm extends Component {
   }
 
   componentWillMount() { // Carrega a os dados de search na inicialização
-    this.props.search
+    this.props.search()
   }
 
   keyHandler(e) {
