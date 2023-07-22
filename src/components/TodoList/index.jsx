@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import IconButton from '../IconButton'
 
+import { markAsDone, markAsPeding, remove } from '../../main/actions/actionsCreators'
+
+
 const TodoList = (props) => {
   const rendrRows = () => {
     const list = props.list || []
@@ -47,9 +50,25 @@ const TodoList = (props) => {
 
 function mapStateToProps(state) {
   return {
-    description: state.todo.description,
     list: state.todo.list
   }
 }
 
-export default connect(mapStateToProps)(TodoList)
+function mapDispatchToProps(dispatch) {
+  return {
+    handleMarkAsDone(params) {
+      const action = markAsDone(params)
+      dispatch(action)
+    },
+    handleMarkAsPending(params) {
+      const action = markAsPeding(params)
+      dispatch(action)
+    },
+    handleRemove(params) {
+      const action = remove(params)
+      dispatch(action)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

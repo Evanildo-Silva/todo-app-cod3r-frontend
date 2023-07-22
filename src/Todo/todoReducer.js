@@ -1,18 +1,6 @@
 const INIT_STATE = {
-  description: 'Ler livros',
-  list: [{
-    _id: 1,
-    description: 'Pagar cartão',
-    done: true
-  }, {
-    _id: 2,
-    description: 'Pagar telefone',
-    done: false
-  }, {
-    _id: 3,
-    description: 'Médico',
-    done: false
-  }]
+  description: '',
+  list: []
 }
 
 export default function (state = INIT_STATE, action) {
@@ -25,7 +13,12 @@ export default function (state = INIT_STATE, action) {
     case 'TODO_SEARCHED':
       return {
         ...state,
-        list: action.payload.data
+        list: action.payload
+      }
+    case 'TODO_CLEAR':
+      return {
+        ...state,
+        description: ''
       }
 
     default:

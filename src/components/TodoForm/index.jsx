@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { changeDescription, search } from '../../main/actions/actionsCreators'
+import { addTodo, changeDescription, clear, search } from '../../main/actions/actionsCreators'
 import Grid from '../Grid'
 import IconButton from '../IconButton'
 
@@ -11,12 +11,12 @@ class TodoForm extends Component {
   }
 
   componentWillMount() { // Carrega a os dados de search na inicialização
-    this.props.search()
+    this.props.handleSearch()
   }
 
   keyHandler(e) {
     if (e.key === 'Enter') {
-      e.shiftKey ? this.props.handleSearch() : this.props.handleAdd()
+      e.shiftKey ? this.props.handleSearch() : this.props.handleAdd(this.props.description)
     } else if (e.key === 'Escape') {
       this.props.handleClear()
     }
@@ -35,7 +35,7 @@ class TodoForm extends Component {
           />
         </Grid>
         <Grid cols='12 3 2'>
-          <IconButton style='primary' icon='plus' onClick={this.props.handleAdd}></IconButton>
+          <IconButton style='primary' icon='plus' onClick={() => this.props.handleAdd(this.props.description)}></IconButton>
           <IconButton style='info' icon='search' onClick={this.props.handleSearch}></IconButton>
           <IconButton style='default' icon='close' onClick={this.props.handleClear}></IconButton>
         </Grid>
@@ -56,8 +56,16 @@ function mapDispatchToProps(dispatch) {
       const action = changeDescription(params)
       dispatch(action)
     },
-    search() {
+    handleSearch() {
       const action = search()
+      dispatch(action)
+    },
+    handleAdd(params) {
+      const action = addTodo(params)
+      dispatch(action)
+    },
+    handleClear(params) {
+      const action = clear(params)
       dispatch(action)
     }
   }
